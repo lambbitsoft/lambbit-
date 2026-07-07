@@ -1,0 +1,13 @@
+{
+  "popup": {
+    "enabled": true,
+    "image": "https://lambbitsoft.github.io/lambbit/ads/creatives/popup-sample.png",
+    "link": "https://lambbitsoft.github.io/lambbit/",
+    "everyMinutes": 20
+  },
+  "banner": {
+    "enabled": true,
+    "iframe": "https://lambbitsoft.github.io/lambbit/ads/coupang.html",
+    "height": 128
+  }
+}
