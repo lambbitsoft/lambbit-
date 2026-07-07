@@ -1,107 +1,199 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lambbit 앱 — 다운로드</title>
-<meta name="description" content="LambbitDownloader · LambbitRef · LambbitVector — 무료 데스크톱 앱. 영상 다운로드, 레퍼런스 보드, 이미지 벡터화.">
+<title>다운로드 | LambbitApps</title>
+<meta name="description" content="LambbitDownloader · LambbitRef · LambbitVector — 디자이너·크리에이터를 위한 무료 Windows 데스크톱 앱.">
 <style>
-  :root{--bg:#15161a;--panel:#1c1e24;--panel2:#23262e;--line:#2e3138;--txt:#e7e9ee;--dim:#9aa0ad;--accent:#5b8cff;--accent2:#4a78e6;}
-  *{box-sizing:border-box;}
-  body{margin:0;background:var(--bg);color:var(--txt);font-family:"Segoe UI","Malgun Gothic",system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
-  a{color:inherit;text-decoration:none;}
-  .wrap{max-width:1040px;margin:0 auto;padding:0 20px;}
-  header{text-align:center;padding:70px 20px 40px;}
-  .logo{font-size:34px;font-weight:800;letter-spacing:.5px;}
-  .logo span{color:var(--accent);}
-  .tag{margin-top:14px;color:var(--dim);font-size:16px;line-height:1.7;}
-  .badge{display:inline-block;margin-top:18px;font-size:12px;color:var(--accent);border:1px solid var(--accent);border-radius:20px;padding:5px 14px;opacity:.85;}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;padding:20px 0 50px;}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px;display:flex;flex-direction:column;transition:.15s;}
-  .card:hover{border-color:#3b4150;transform:translateY(-3px);}
-  .card .ic{width:72px;height:72px;border-radius:16px;object-fit:cover;background:#000;}
-  .card h2{font-size:20px;margin:16px 0 4px;}
-  .card .ver{font-size:12px;color:var(--dim);font-weight:400;}
-  .card .desc{color:var(--dim);font-size:14px;line-height:1.75;margin:12px 0 14px;flex:1;}
-  .feat{list-style:none;padding:0;margin:0 0 20px;display:flex;flex-direction:column;gap:7px;}
-  .feat li{font-size:13px;color:var(--dim);padding-left:20px;position:relative;}
-  .feat li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:700;}
-  .dl{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:#fff;font-weight:700;font-size:14.5px;padding:13px;border-radius:11px;transition:.12s;}
-  .dl:hover{background:var(--accent2);}
-  .dl small{font-weight:400;opacity:.8;}
-  .os{text-align:center;font-size:11px;color:var(--dim);margin-top:9px;}
-  footer{text-align:center;color:var(--dim);font-size:12.5px;padding:30px 20px 60px;border-top:1px solid var(--line);line-height:1.9;}
+  :root{
+    --bg:#0c0c0e; --bar:#161618; --card:#111113; --card-h:#17181b;
+    --line:#2a2b30; --line2:#3a3b42;
+    --tx:#f3f4f6; --tx2:#9a9ca4; --tx3:#66686f;
+    --accent:#46a9d6; --accent-b:#4fb2df; --accent-bg:rgba(70,169,214,.09);
+    --dl:#1b1c20; --dl-b:#303138;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--tx);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Malgun Gothic",sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased;font-size:15px}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:940px;margin:0 auto;padding:0 24px}
+  .muted{color:var(--tx2)}
+  .seclabel{text-align:center;color:var(--tx2);font-size:13px;margin:0 0 20px}
+
+  /* header */
+  header{position:sticky;top:0;z-index:50;background:var(--bar);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:58px}
+  .logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:18px;letter-spacing:-.01em}
+  .logo .mk{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--accent),#3f7fd6);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff}
+  .nav-links{display:flex;gap:28px;font-size:14px}
+  .nav-links a{color:var(--tx2)}
+  .nav-links a.active{color:var(--tx);font-weight:600}
+  .nav-links a:hover{color:var(--tx)}
+
+  /* hero */
+  .hero{padding:66px 0 8px}
+  .hero h1{font-size:46px;font-weight:800;letter-spacing:-.03em;margin:0 0 14px}
+  .hero .lead{display:flex;align-items:center;gap:12px;color:var(--tx2);font-size:15px}
+  .verbox{border:1px solid var(--line);background:#0f0f11;border-radius:5px;padding:3px 12px;font-size:12.5px;color:var(--tx2);font-variant-numeric:tabular-nums}
+
+  /* app cards (mirrors PureRef "choose platform") */
+  .apps{padding:44px 0 8px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .app{border:1px solid var(--line);background:var(--card);border-radius:7px;padding:26px 20px 20px;text-align:center;transition:border-color .18s,background .18s;display:flex;flex-direction:column;align-items:center}
+  .app:hover{border-color:var(--accent);background:var(--card-h)}
+  .app .ic{width:60px;height:60px;border-radius:15px;margin-bottom:14px;box-shadow:0 6px 18px rgba(0,0,0,.4)}
+  .app h2{font-size:16px;font-weight:700;margin:0 0 3px}
+  .app .plat{font-size:12px;color:var(--tx3);margin-bottom:4px}
+  .app .desc{font-size:12.5px;color:var(--tx2);min-height:34px;margin-bottom:16px;line-height:1.45}
+  .dlbtn{margin-top:auto;width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    background:var(--dl);border:1px solid var(--dl-b);color:var(--tx);font-size:13.5px;font-weight:600;
+    padding:10px 14px;border-radius:6px;cursor:pointer;transition:border-color .15s,background .15s}
+  .dlbtn:hover{border-color:var(--accent);background:#202127}
+  .dlbtn svg{width:15px;height:15px;color:var(--accent)}
+  .dlbtn .ver{color:var(--tx3);font-weight:500;font-size:12px}
+  .apps .foot{text-align:center;color:var(--tx3);font-size:12.5px;margin-top:18px}
+
+  /* install callout box (mirrors PureRef "select amount" box) */
+  .box{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:30px 34px;margin-top:12px}
+  .box h3{margin:0 0 4px;font-size:16px;display:flex;align-items:center;gap:9px}
+  .box h3 svg{width:19px;height:19px;color:var(--accent)}
+  .box p{color:var(--tx2);font-size:14px;margin:8px 0}
+  .steps{counter-reset:s;margin:16px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px}
+  .steps li{counter-increment:s;position:relative;padding-left:38px;font-size:14px}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:-1px;width:26px;height:26px;border-radius:7px;
+    background:var(--accent-bg);border:1px solid rgba(70,169,214,.35);color:var(--accent);font-weight:700;font-size:13px;
+    display:flex;align-items:center;justify-content:center}
+  .steps b{color:#fff}
+  .box .note{font-size:12.5px;color:var(--tx3);margin-top:15px}
+
+  section.blk{padding:52px 0 0}
+
+  /* FAQ (mirrors PureRef) */
+  .faq{padding:56px 0 10px}
+  details{border-bottom:1px solid var(--line)}
+  summary{cursor:pointer;padding:16px 4px;font-size:14.5px;list-style:none;display:flex;align-items:center;gap:12px;color:var(--tx)}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"›";color:var(--accent);font-size:18px;transition:transform .18s;display:inline-block}
+  details[open] summary::before{transform:rotate(90deg)}
+  details .a{padding:0 4px 18px 28px;color:var(--tx2);font-size:13.5px}
+
+  footer{border-top:1px solid var(--line);margin-top:56px;padding:30px 0 56px;text-align:center;color:var(--tx3);font-size:12.5px}
+  footer a{color:var(--accent)}
+
+  @media (max-width:720px){
+    .hero h1{font-size:34px}
+    .grid{grid-template-columns:1fr}
+    .nav-links{gap:18px}
+    .nav-links a:not(.active){display:none}
+  }
 </style>
 </head>
 <body>
-  <header>
-    <div class="logo">Lambbit<span>Apps</span></div>
-    <div class="tag">디자이너·크리에이터를 위한 무료 데스크톱 도구 모음<br>설치하면 자동 업데이트됩니다.</div>
-    <div class="badge">Windows · 무료</div>
-  </header>
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span class="mk">L</span> LambbitApps</div>
+    <nav class="nav-links">
+      <a href="#" class="active">다운로드</a>
+      <a href="#install">설치 안내</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://github.com/lambbitsoft" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
 
-  <main class="wrap">
+<div class="wrap">
+
+  <section class="hero">
+    <h1>다운로드</h1>
+    <div class="lead"><span>LambbitApps</span> <span class="verbox">Windows 10 / 11 · 64-bit</span></div>
+  </section>
+
+  <section class="apps">
+    <p class="seclabel">앱 선택</p>
     <div class="grid">
-      <div class="card" data-repo="lambbitdownloader">
-        <img class="ic" src="./lambbitdownloader.png" alt="LambbitDownloader">
-        <h2>LambbitDownloader <span class="ver"></span></h2>
-        <div class="desc">링크만 붙여넣으면 영상·이미지·음악을 골라 다운로드. WebP·WebM·MP4·GIF·MP3 변환까지.</div>
-        <ul class="feat">
-          <li>YouTube · Vimeo · Instagram · Pinterest · Behance · SoundCloud 등</li>
-          <li>단일 영상 링크는 붙여넣기만 하면 바로 저장</li>
-          <li>이미지↔WebP, 영상↔WebM/MP4 변환 탭</li>
-        </ul>
-        <a class="dl" target="_blank" rel="noopener">다운로드 <small>· Windows</small></a>
-        <div class="os">Windows 10/11 · 설치형</div>
+
+      <div class="app" data-repo="lambbitdownloader">
+        <img class="ic" src="lambbitdownloader.png" alt="LambbitDownloader">
+        <h2>LambbitDownloader</h2>
+        <div class="plat">영상 다운로더 · 변환기</div>
+        <div class="desc">링크만 붙여넣으면 영상·이미지·음악을 골라 다운로드. WebP·MP4·GIF·MP3 변환.</div>
+        <a class="dlbtn dl" href="https://github.com/lambbitsoft/lambbitdownloader/releases/latest" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Installer <span class="ver">64bit</span>
+        </a>
       </div>
 
-      <div class="card" data-repo="lambbitref">
-        <img class="ic" src="./lambbitref.png" alt="LambbitRef">
-        <h2>LambbitRef <span class="ver"></span></h2>
+      <div class="app" data-repo="lambbitref">
+        <img class="ic" src="lambbitref.png" alt="LambbitRef">
+        <h2>LambbitRef</h2>
+        <div class="plat">레퍼런스 보드</div>
         <div class="desc">이미지·GIF·영상·오디오를 자유롭게 배치하는 레퍼런스 보드 (PureRef 스타일).</div>
-        <ul class="feat">
-          <li>URL 영상 임베드 · 드로잉 · 텍스트 메모</li>
-          <li>그룹·정렬·자동 배치 · 프로젝트 저장(.naur)</li>
-          <li>다크·라이트·글래스 테마</li>
-        </ul>
-        <a class="dl" target="_blank" rel="noopener">다운로드 <small>· Windows</small></a>
-        <div class="os">Windows 10/11 · 설치형</div>
+        <a class="dlbtn dl" href="https://github.com/lambbitsoft/lambbitref/releases/latest" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Installer <span class="ver">64bit</span>
+        </a>
       </div>
 
-      <div class="card" data-repo="lambbitvector">
-        <img class="ic" src="./lambbitvector.png" alt="LambbitVector">
-        <h2>LambbitVector <span class="ver"></span></h2>
+      <div class="app" data-repo="lambbitvector">
+        <img class="ic" src="lambbitvector.png" alt="LambbitVector">
+        <h2>LambbitVector</h2>
+        <div class="plat">이미지 → SVG 벡터</div>
         <div class="desc">이미지를 깔끔한 SVG 벡터로 변환. 원본↔벡터 비교 슬라이더와 프리셋 제공.</div>
-        <ul class="feat">
-          <li>VTracer 엔진 · 로고/일러스트/사진/라인아트 프리셋</li>
-          <li>색상 정밀도·부드러움 실시간 조정</li>
-          <li>SVG · PNG 내보내기</li>
-        </ul>
-        <a class="dl" target="_blank" rel="noopener">다운로드 <small>· Windows</small></a>
-        <div class="os">Windows 10/11 · 설치형</div>
+        <a class="dlbtn dl" href="https://github.com/lambbitsoft/lambbitvector/releases/latest" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Installer <span class="ver">64bit</span>
+        </a>
       </div>
+
     </div>
-  </main>
+    <div class="foot">무료 · 첫 설치 후 자동 업데이트 · macOS 버전 준비 중</div>
+  </section>
 
-  <footer>
-    LambbitApps · GitHub: <a href="https://github.com/lambbitsoft" style="color:var(--accent)">@lambbitsoft</a><br>
-    Windows용 무료 배포 · 첫 설치 후 자동 업데이트
-  </footer>
+  <section class="blk" id="install">
+    <p class="seclabel">설치 안내</p>
+    <div class="box">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> "Windows의 PC 보호" 경고가 뜨나요?</h3>
+      <p>새로 나온 앱이라 Windows(SmartScreen)가 아직 익숙하지 않아 경고를 띄우는 것뿐입니다. <b>바이러스가 아니며 안전합니다.</b> 아래대로 진행하면 정상 설치됩니다.</p>
+      <ol class="steps">
+        <li>파란 경고 창에서 <b>추가 정보</b>(More info)를 클릭합니다.</li>
+        <li>아래에 나타나는 <b>실행</b>(Run anyway) 버튼을 누릅니다.</li>
+        <li>설치가 정상적으로 진행됩니다. (평판이 쌓이면 경고는 사라집니다.)</li>
+      </ol>
+      <p class="note">💡 다운로드가 차단되면, 브라우저 다운로드 목록에서 <b>⋯ → 유지(Keep)</b>를 눌러 저장하세요.</p>
+    </div>
+  </section>
 
-  <script>
-    const OWNER = 'lambbitsoft';
-    document.querySelectorAll('.card').forEach(async (card) => {
-      const repo = card.dataset.repo;
-      const btn = card.querySelector('.dl');
-      const releasesUrl = `https://github.com/${OWNER}/${repo}/releases/latest`;
-      btn.href = releasesUrl;   // fallback
-      try {
-        const r = await (await fetch(`https://api.github.com/repos/${OWNER}/${repo}/releases/latest`)).json();
-        if (r.tag_name) card.querySelector('.ver').textContent = 'v' + r.tag_name.replace(/^v/, '');
-        const exe = (r.assets || []).find(a => /setup.*\.exe$/i.test(a.name)) || (r.assets || []).find(a => /\.exe$/i.test(a.name));
-        if (exe) btn.href = exe.browser_download_url;
-      } catch (e) {}
-    });
-  </script>
+  <section class="faq" id="faq">
+    <p class="seclabel" style="font-size:15px;color:var(--tx)">FAQ</p>
+    <details><summary>정말 무료인가요?</summary><div class="a">네, 무료로 사용할 수 있습니다. 앱에 소량의 광고가 표시되며, 원하시면 앱 안에서 일회성 결제로 광고를 영구 제거할 수 있습니다.</div></details>
+    <details><summary>안전한가요? 바이러스 아닌가요?</summary><div class="a">안전합니다. 처음 설치 시 Windows SmartScreen 경고가 나올 수 있는데, 이는 신생 앱이라 아직 평판이 쌓이지 않아서일 뿐입니다. 위 "설치 안내"대로 진행하시면 됩니다.</div></details>
+    <details><summary>자동으로 업데이트되나요?</summary><div class="a">네. 한 번 설치하면 새 버전이 나올 때 자동으로 내려받아 재시작 시 적용됩니다. 매번 다시 설치할 필요가 없습니다.</div></details>
+    <details><summary>Mac도 지원하나요?</summary><div class="a">현재는 Windows 10/11 전용입니다. macOS 버전은 준비 중입니다.</div></details>
+  </section>
+
+</div>
+
+<footer>
+  LambbitApps · <a href="https://github.com/lambbitsoft" target="_blank" rel="noopener">@lambbitsoft</a><br>
+  Windows용 무료 배포 · 첫 설치 후 자동 업데이트
+</footer>
+
+<script>
+  const OWNER='lambbitsoft';
+  document.querySelectorAll('.app[data-repo]').forEach(async(card)=>{
+    const repo=card.dataset.repo, btn=card.querySelector('.dl'), verEl=btn.querySelector('.ver');
+    try{
+      const res=await fetch(`https://api.github.com/repos/${OWNER}/${repo}/releases/latest`);
+      if(!res.ok) return;
+      const rel=await res.json();
+      if(rel.tag_name) verEl.textContent=(rel.tag_name.replace(/^v/i,'')+' · 64bit');
+      const exe=(rel.assets||[]).find(a=>/Setup.*\.exe$/i.test(a.name))||(rel.assets||[]).find(a=>/\.exe$/i.test(a.name));
+      if(exe) btn.href=exe.browser_download_url;
+    }catch(e){}
+  });
+</script>
 </body>
 </html>
